@@ -80,9 +80,13 @@ Algoritmo Proyecto1
 	
 	Escribir "Desglose: "
 	Escribir "Precio original: ", precio_original
-	Escribir "Precio con cupon de descuento: ", resultado_temporal
+	si cupon_de_descuento > 0 Entonces
+		Escribir "Precio con cupon de descuento: ", resultado_temporal
+	FinSi
 	Escribir "Precio mas impuestos: ", resultado_impuestos
-	Escribir "Descuento por cantidad: ", descuento_cantidad
+	si descuento_cantidad > 0 Entonces
+		Escribir "Precio con descuento por cantidad: ", resultado_impuestos - descuento_cantidad
+	FinSi
 	Escribir "Costo de envio: ", costo_envio
 	Escribir "Precio final: ", costo_final
 FinAlgoritmo
