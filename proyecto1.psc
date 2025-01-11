@@ -1,23 +1,22 @@
 Algoritmo Proyecto1
 	
-	definir precio_original, cupon_de_descuento, impuestos, cantidad, descuento_cantidad, peso, costo_envio, costo_final Como real
-	definir destino Como real
+	Definir precio_original, cupon_de_descuento, impuestos, cantidad, descuento_cantidad, peso, costo_envio, costo_final Como real
+	Definir destino Como real
 	Definir monto_descuento Como real 
-	Definir monto_impuestos como real	
-	definir nombres_productos Como Caracter
-	definir eleccion Como Entero
-	Dimension nombre_del_producto[3]
+	Definir monto_impuestos Como real	
+	Definir nombres_productos Como Caracter
+	Definir eleccion Como Entero
+	Dimension nombre_del_producto[3] 
 	
-	Escribir "Selecciona el producto:"
-	Escribir " Para zapatillas ingesa 1, ", "Para sandalias ingresa 2, ", "Para botas ingresa 3. "
+	Escribir "Selecciona el producto: Para zapatillas ingesa 1. Para sandalias ingresa 2. Para botas ingresa 3."
 	
 	nombre_del_producto[1] <- "Zapatillas"
 	nombre_del_producto[2] <- "Sandalias"
 	nombre_del_producto[3] <- "Botas"
 	
-	leer eleccion
+	Leer eleccion
 	
-	segun eleccion hacer
+	Segun eleccion Hacer 
 		1: 
 			precio_original <- 100
 		2: 
@@ -29,64 +28,71 @@ Algoritmo Proyecto1
 	FinSegun
 	
 	
-	Escribir "Ha escogido: ", nombre_del_producto[eleccion], ", El precio del producto es: ", precio_original
+	Escribir "Ha escogido: ", nombre_del_producto[eleccion], ", El precio del producto es: $", precio_original
 	
 	
-	//escribir "ingrese precio del producto"
-	//leer precio_original
-	
-	escribir "Ingrese cupon de descuento (si aplica)"
-	leer cupon_de_descuento
+	Escribir "Ingrese cupon de descuento en % (si aplica)"
+	Leer cupon_de_descuento
 	
 	descuento_cantidad <- 0
 	
 	monto_descuento <- precio_original * (cupon_de_descuento / 100)
 	
-	resultado_temporal <- precio_original - monto_descuento
+	precio_con_cupon_de_descuento <- precio_original - monto_descuento
 	
-	escribir "Ingrese impuestos"
-	leer impuestos
+	Escribir "Ingrese impuestos en %"
+	Leer impuestos
 	
-	monto_impuestos  <- resultado_temporal * (impuestos / 100)
-	resultado_impuestos <- monto_impuestos + resultado_temporal
+	monto_impuestos  <- precio_con_cupon_de_descuento * (impuestos / 100)
+	precio_mas_impuestos <- monto_impuestos + precio_con_cupon_de_descuento
 	
-	escribir "Ingrese cantidad"
-	leer cantidad
+	Escribir "Ingrese cantidad"
+	Leer cantidad
 	
-	si cantidad >= 2 Entonces
-		Escribir "Tiene un descuento por cantidad, ingrese descuento: "
-		leer descuento_cantidad
+	Si cantidad >= 2 Entonces
+		Escribir "Tiene un descuento por cantidad, ingrese descuento en %:"
+		Leer descuento_cantidad
 	SiNo
 		Escribir "Sin descuento por cantidad"
 	FinSi
 	
-	descuento_cantidad <- resultado_impuestos * (descuento_cantidad / 100)
+	descuento_cantidad <- precio_mas_impuestos * (descuento_cantidad / 100)
 	
 	Escribir "Ingrese peso en kg"
-	leer peso
+	Leer peso
 	
-	Escribir "Ingrese destino de envio 1. Maipú, 2. Vitacura, 3. Ñuñoa"
-	leer destino
+	Escribir "Seleccione destino de envio: Para Maipú ingrese 1. Para Vitacura ingrese 2. Para Ñuñoa ingrese 3"
+	Leer destino
 	
 	Mientras destino < 1 o destino > 3 Hacer
 		Escribir "Destino incorrecto. Tienes las siguientes opciones: 1. Maipú, 2. Vitacura, 3. Ñuñoa"
-		leer destino
+		Leer destino
 	Fin Mientras
 	
 	costo_fijo <- 10
 	costo_envio <- costo_fijo + (cantidad * peso)
 	
-	costo_final <- (cantidad * (resultado_impuestos - descuento_cantidad)) + costo_envio
+	costo_final <- (cantidad * (precio_mas_impuestos - descuento_cantidad)) + costo_envio
 	
-	Escribir "Desglose: "
-	Escribir "Precio original: ", precio_original
-	si cupon_de_descuento > 0 Entonces
-		Escribir "Precio con cupon de descuento: ", resultado_temporal
+	Escribir "DESGLOSE:"
+	
+	Escribir "Precio original: $", precio_original
+	
+	Si cupon_de_descuento > 0 Entonces
+		Escribir "Tu cupon fue : $", monto_descuento 
+		Escribir "Precio con cupon de descuento: $", precio_con_cupon_de_descuento
 	FinSi
-	Escribir "Precio mas impuestos: ", resultado_impuestos
-	si descuento_cantidad > 0 Entonces
-		Escribir "Precio con descuento por cantidad: ", resultado_impuestos - descuento_cantidad
+	
+	Escribir "Precio mas impuestos: $", precio_mas_impuestos
+	
+	Si descuento_cantidad > 0 Entonces
+    Escribir "Tu descuento de cantidad fue: $", descuento_cantidad 
+		Escribir "Precio con descuento por cantidad: $", precio_mas_impuestos - descuento_cantidad
 	FinSi
-	Escribir "Costo de envio: ", costo_envio
-	Escribir "Precio final: ", costo_final
+	
+	Escribir "Costo de envio: $", costo_envio
+	Escribir "Precio final: $", costo_final
+	
+	Escribir "---------------------------"
+	
 FinAlgoritmo
